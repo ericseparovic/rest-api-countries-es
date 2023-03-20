@@ -5,7 +5,7 @@ function Header() {
 	const element = <FontAwesomeIcon icon={faMoon} />;
 	return (
 		<header>
-			<div className='flex justify-between items-center h-20 px-4'>
+			<div className='flex justify-between items-center h-20 px-4 md:px-12'>
 				<h1 className='font-bold'>Where in the word?</h1>
 
 				<div className='flex item-center gap-2'>

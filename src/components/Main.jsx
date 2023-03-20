@@ -4,7 +4,7 @@ import Filter from './Filter';
 function Main() {
 	return (
 		<main className='bg-gray-100 h-screen flex flex-col items-center p-8'>
-			<form className='w-full'>
+			<form className='w-full md:flex justify-between'>
 				<Search />
 				<Filter />
 			</form>

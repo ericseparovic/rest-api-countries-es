@@ -16,7 +16,7 @@ function Filter() {
 			<p className='text-xs'>Filter by Region</p>
 			<FontAwesomeIcon icon={faChevronDown} size='xs' />
 			<div
-				className={`bg-white text-xs w-44  absolute top-16 right-0  cursor-pointer ${
+				className={`bg-white text-xs w-44  absolute top-16 right-0  cursor-pointer rounded-md ${
 					!status && 'hidden'
 				}`}>
 				<ul>

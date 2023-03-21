@@ -4,8 +4,8 @@ import { faMoon } from '@fortawesome/free-solid-svg-icons';
 function Header() {
 	const element = <FontAwesomeIcon icon={faMoon} />;
 	return (
-		<header>
-			<div className='flex justify-between items-center h-20 px-4 md:px-12'>
+		<header className='px-8'>
+			<div className='flex max-w-5xl h-20 items-center justify-between mx-auto'>
 				<h1 className='font-bold'>Where in the word?</h1>
 
 				<div className='flex item-center gap-2'>

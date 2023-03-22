@@ -1,6 +1,7 @@
 import Search from './Search';
 import Filter from './Filter';
 import { useAxios } from '../Hooks/useAxios';
+import Country from './Country';
 
 function Main() {
 	const URL = 'src/data.json';
@@ -14,118 +15,9 @@ function Main() {
 					<Filter />
 				</form>
 				<section className='grid grid-cols-1  sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-14 place-items-center mt-8'>
-					<div className='rounded-md overflow-hidden max-w-xs shadow-lg'>
-						<div>
-							<img src={!isLoading && data[122].flag} alt='' />
-						</div>
-						<div className='bg-white p-6'>
-							<h2 className='font-bold text-xl mb-4'>Name Pais</h2>
-							<p className='text-sm pb-2 text-gray-800 font-medium'>
-								Population:{' '}
-								<span className='text-gray-700 font-light'>92,4343434</span>
-							</p>
-							<p className='text-sm pb-2 text-gray-800 font-medium'>
-								Region:{' '}
-								<span className='text-gray-700 font-light'>92,4343434</span>
-							</p>
-
-							<p className='text-sm pb-2 text-gray-800 font-medium'>
-								Capital:{' '}
-								<span className='text-gray-700 font-light'>92,4343434</span>
-							</p>
-						</div>
-					</div>
-					<div className='rounded-md overflow-hidden max-w-xs'>
-						<div>
-							<img src={!isLoading && data[122].flag} alt='' />
-						</div>
-						<div className='bg-white p-6'>
-							<h2 className='font-bold text-xl mb-4'>Name Pais</h2>
-							<p className='text-sm pb-2 text-gray-800'>
-								Population: <span className='text-gray-700'>92,4343434</span>
-							</p>
-							<p className='text-sm pb-2 text-gray-800'>
-								Population: <span className='text-gray-700'>92,4343434</span>
-							</p>
-
-							<p className='text-sm pb-2 text-gray-800'>
-								Population: <span className='text-gray-700'>92,4343434</span>
-							</p>
-						</div>
-					</div>
-
-					<div className='rounded-md overflow-hidden max-w-xs'>
-						<div>
-							<img src={!isLoading && data[122].flag} alt='' />
-						</div>
-						<div className='bg-white p-6'>
-							<h2 className='font-bold text-xl mb-4'>Name Pais</h2>
-							<p className='text-sm pb-2 text-gray-800'>
-								Population: <span className='text-gray-700'>92,4343434</span>
-							</p>
-							<p className='text-sm pb-2 text-gray-800'>
-								Population: <span className='text-gray-700'>92,4343434</span>
-							</p>
-
-							<p className='text-sm pb-2 text-gray-800'>
-								Population: <span className='text-gray-700'>92,4343434</span>
-							</p>
-						</div>
-					</div>
-					<div className='rounded-md overflow-hidden max-w-xs'>
-						<div>
-							<img src={!isLoading && data[122].flag} alt='' />
-						</div>
-						<div className='bg-white p-6'>
-							<h2 className='font-bold text-xl mb-4'>Name Pais</h2>
-							<p className='text-sm pb-2 text-gray-800'>
-								Population: <span className='text-gray-700'>92,4343434</span>
-							</p>
-							<p className='text-sm pb-2 text-gray-800'>
-								Population: <span className='text-gray-700'>92,4343434</span>
-							</p>
-
-							<p className='text-sm pb-2 text-gray-800'>
-								Population: <span className='text-gray-700'>92,4343434</span>
-							</p>
-						</div>
-					</div>
-					<div className='rounded-md overflow-hidden max-w-xs'>
-						<div>
-							<img src={!isLoading && data[122].flag} alt='' />
-						</div>
-						<div className='bg-white p-6'>
-							<h2 className='font-bold text-xl mb-4'>Name Pais</h2>
-							<p className='text-sm pb-2 text-gray-800'>
-								Population: <span className='text-gray-700'>92,4343434</span>
-							</p>
-							<p className='text-sm pb-2 text-gray-800'>
-								Population: <span className='text-gray-700'>92,4343434</span>
-							</p>
-
-							<p className='text-sm pb-2 text-gray-800'>
-								Population: <span className='text-gray-700'>92,4343434</span>
-							</p>
-						</div>
-					</div>
-					<div className='rounded-md overflow-hidden max-w-xs'>
-						<div>
-							<img src={!isLoading && data[122].flag} alt='' />
-						</div>
-						<div className='bg-white p-6'>
-							<h2 className='font-bold text-xl mb-4'>Name Pais</h2>
-							<p className='text-sm pb-2 text-gray-800'>
-								Population: <span className='text-gray-700'>92,4343434</span>
-							</p>
-							<p className='text-sm pb-2 text-gray-800'>
-								Population: <span className='text-gray-700'>92,4343434</span>
-							</p>
-
-							<p className='text-sm pb-2 text-gray-800'>
-								Population: <span className='text-gray-700'>92,4343434</span>
-							</p>
-						</div>
-					</div>
+					{data.map((country) => {
+						return <Country country={country} key={country.numericCode} />;
+					})}
 				</section>
 			</div>
 		</main>

@@ -3,7 +3,7 @@ import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
 function Search() {
 	return (
-		<div className='mb-12 relative'>
+		<div className='mb-12 relative shadow-lg'>
 			<div className='absolute flex items-center p-5'>
 				<FontAwesomeIcon icon={faMagnifyingGlass} />
 			</div>

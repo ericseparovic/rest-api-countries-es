@@ -11,7 +11,7 @@ function Filter() {
 
 	return (
 		<div
-			className='bg-white rounded-md w-44 p-4 flex items-center justify-between relative text-gray-800 h-14 cursor-pointer'
+			className='bg-white rounded-md w-44 p-4 flex items-center justify-between relative text-gray-800 h-14 cursor-pointer shadow-lg'
 			onClick={showModalFilter}>
 			<p className='text-xs'>Filter by Region</p>
 			<FontAwesomeIcon icon={faChevronDown} size='xs' />

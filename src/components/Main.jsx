@@ -8,7 +8,7 @@ function Main() {
 	const { data, isLoading, hasError } = useAxios(URL);
 
 	return (
-		<main className='bg-gray-100 h-full flex flex-col items-center pb-12 px-6'>
+		<main className='bg-gray-100 h-full flex flex-col items-center pb-12 px-6  shadow-inner'>
 			<div className='container mx-auto'>
 				<form className='md:flex justify-between mt-8'>
 					<Search />

@@ -4,7 +4,7 @@ function Country({ country }) {
 	const { name, population, region, capital, flag } = country;
 
 	return (
-		<Link to={'country-detail'}>
+		<Link to={'/detail'}>
 			<div className='rounded-md overflow-hidden max-w-xs shadow-lg'>
 				<div>
 					<img

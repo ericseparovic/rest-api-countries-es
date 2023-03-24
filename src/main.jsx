@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import Home from './Routes/Home';
+import Home, { loader as countriesLoader } from './Routes/Home';
 import Header from './components/Header';
 import Detail from './Routes/Detail';
 
@@ -14,6 +14,7 @@ const router = createBrowserRouter([
 			{
 				index: true,
 				element: <Home />,
+				loader: countriesLoader,
 			},
 			{
 				path: '/detail',

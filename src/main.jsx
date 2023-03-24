@@ -3,15 +3,23 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Home from './Routes/Home';
+import Header from './components/Header';
+import Detail from './Routes/Detail';
 
 const router = createBrowserRouter([
 	{
 		path: '/',
-		element: <Home />,
-	},
-	{
-		path: 'country-detail',
-		element: <h1>Country Detail</h1>,
+		element: <Header />,
+		children: [
+			{
+				index: true,
+				element: <Home />,
+			},
+			{
+				path: '/detail',
+				element: <Detail />,
+			},
+		],
 	},
 ]);
 

@@ -4,7 +4,7 @@ import './index.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Home, { loader as countriesLoader } from './Routes/Home';
 import Header from './components/Header';
-import Detail from './Routes/Detail';
+import Detail, { loader as detailCountry } from './Routes/Detail';
 
 const router = createBrowserRouter([
 	{
@@ -17,8 +17,9 @@ const router = createBrowserRouter([
 				loader: countriesLoader,
 			},
 			{
-				path: '/detail',
+				path: '/detail/:country',
 				element: <Detail />,
+				loader: detailCountry,
 			},
 		],
 	},

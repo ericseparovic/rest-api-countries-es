@@ -3,10 +3,14 @@ export async function getCountries() {
 	try {
 		const response = await fetch(ULR_API);
 		const data = await response.json();
-		console.log(data);
 		return data;
 	} catch (error) {
 		console.error(error);
 		return null;
 	}
+}
+
+export function getCountry(numericCountry) {
+	const countries = getCountries();
+	return countries;
 }

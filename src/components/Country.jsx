@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
 
 function Country({ country }) {
-	const { name, population, region, capital, flag } = country;
+	const { name, population, region, capital, flag, numericCode } = country;
 
 	return (
-		<Link to={'/detail'}>
+		<Link to={`/detail/${numericCode}`}>
 			<div className='rounded-md overflow-hidden max-w-xs shadow-lg'>
 				<div>
 					<img

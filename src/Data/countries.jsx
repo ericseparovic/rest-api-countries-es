@@ -10,7 +10,16 @@ export async function getCountries() {
 	}
 }
 
-export function getCountry(numericCountry) {
-	const countries = getCountries();
-	return countries;
+export async function getCountry(numericCode) {
+	try {
+		const countries = await getCountries();
+		console.log(countries);
+		const country = await countries.find(
+			async (element) => (await element.numericCode) === numericCode
+		);
+
+		return country;
+	} catch (error) {
+		return [];
+	}
 }

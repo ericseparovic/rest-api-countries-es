@@ -1,111 +1,69 @@
 import ButtonBack from '../components/ButtonBack';
 import { useLoaderData } from 'react-router-dom';
-import { getCountries } from '../Data/countries';
-import { useState, useEffect } from 'react';
-import { faAmericanSignLanguageInterpreting } from '@fortawesome/free-solid-svg-icons';
+import { getCountry } from '../Data/countries';
 
 export function loader() {
-	const countries = getCountries();
-	return countries;
-}
-
-function Detail() {
-	const countries = useLoaderData();
-
 	// Get pathname === numericCodeCountry
 	const url = window.location.pathname;
 	const numericCode = url.substring(url.lastIndexOf('/') + 1);
+	const country = getCountry(numericCode);
 
-	const [country, setCountry] = useState({});
-	const [error, setError] = useState(false);
-	const [isLoading, setIsLoading] = useState(true);
+	return country;
+}
 
-	async function getCountry(numericCode) {
-		const country = await countries.find(
-			(element) => element.numericCode === numericCode
-		);
+function Detail() {
+	const country = useLoaderData();
 
-		return country;
-	}
-
-	const {
-		name,
-		flag,
-		capital,
-		currencies,
-		languages,
-		population,
-		subregion,
-		nativeName,
-		topLevelDomain,
-		region,
-		borders,
-	} = country;
-
-	const populationFormat = new Intl.NumberFormat().format(population);
-	console.log(populationFormat);
-
-	useEffect(() => {
-		getCountry(numericCode)
-			.then((result) => {
-				setCountry(result);
-				setIsLoading(false);
-			})
-			.catch((error) => {
-				setError(true);
-				console.error(error);
-			});
-	}, []);
+	// const populationFormat = new Intl.NumberFormat().format(country.population);
+	console.log(country);
 
 	return (
 		<main className='bg-gray-100 h-full flex flex-col items-center pb-12 px-6  shadow-inner'>
 			<div className='container mx-auto'>
 				<ButtonBack />
 
-				{isLoading ? (
-					<h1>Loaded</h1>
-				) : (
-					<section className='my-12'>
+				{country ? (
+					<section className='my-12 flex sm:flex-row flex-col'>
 						<div>
-							<img src={flag} alt='flag country' />
+							<img src={country.flag} alt='flag country' />
 						</div>
 						<div className='mt-12'>
-							<h1 className='font-bold text-xl mb-4'>{name}</h1>
+							<h1 className='font-bold text-xl mb-4'>{country.name}</h1>
 							<div>
 								<ul className='mb-10'>
 									<li className='text-sm pb-2 text-gray-800 font-medium'>
-										Native Name: <span>{nativeName}</span>
+										Native Name: <span>{country.nativeName}</span>
 									</li>
 									<li className='text-sm pb-2 text-gray-800 font-medium'>
-										Population: <span>{populationFormat}</span>{' '}
+										Population: <span>{country.population}</span>{' '}
 									</li>
 									<li className='text-sm pb-2 text-gray-800 font-medium'>
-										Region: <span>{region}</span>{' '}
+										Region: <span>{country.region}</span>{' '}
 									</li>
 
 									<li className='text-sm pb-2 text-gray-800 font-medium'>
-										Sub Region: <span>{subregion}</span>{' '}
+										Sub Region: <span>{country.subregion}</span>{' '}
 									</li>
 									<li className='text-sm pb-2 text-gray-800 font-medium'>
-										Capital: <span>{capital}</span>{' '}
+										Capital: <span>{country.capital}</span>{' '}
 									</li>
 								</ul>
 								<ul className='mb-10'>
 									<li className='text-sm pb-2 text-gray-800 font-medium'>
 										Top Level Domain:
-										{topLevelDomain.map((domain) => {
+										{country.topLevelDomain.map((domain) => {
 											return <span key={domain}>{domain}</span>;
 										})}
 									</li>
 									<li className='text-sm pb-2 text-gray-800 font-medium'>
 										Currencies:{' '}
-										{currencies.map((currency) => {
+										{country.currencies.map((currency) => {
 											return <span key={currency.code}>{currency.name}</span>;
 										})}
 									</li>
 									<li className='text-sm pb-2 text-gray-800 font-medium'>
 										Languages:{' '}
-										{languages.map((language) => {
+										{country.languages.map((language) => {
 											return (
 												<span key={language.iso639_1}>{language.name}</span>
 											);
@@ -116,7 +74,7 @@ function Detail() {
 							<div>
 								<h4 className='text-md font-medium mb-4'>Border Counties:</h4>
 								<div className='grid grid-cols-3 gap-2'>
-									{borders.map((border) => {
+									{country.borders.map((border) => {
 										return (
 											<div
 												key={border}
@@ -129,6 +87,8 @@ function Detail() {
 							</div>
 						</div>
 					</section>
+				) : (
+					<h1>Loaded</h1>
 				)}
 			</div>
 		</main>

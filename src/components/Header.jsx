@@ -11,10 +11,12 @@ function Header() {
 		<>
 			<header className='container mx-auto px-5'>
 				<div className='w-full flex justify-between h-20 items-center'>
-					<h1 className='font-bold text-xl'>Where in the word?</h1>
+					<h1 className='font-bold md:text-xl text-sm'>Where in the word?</h1>
 					<div className='flex item-center gap-2'>
 						<div>{iconFaMoonLight}</div>
-						<button className='text-gray-800'>Dark Mode</button>
+						<button className='text-gray-800 md:text-lg text-sm'>
+							Dark Mode
+						</button>
 					</div>
 				</div>
 			</header>

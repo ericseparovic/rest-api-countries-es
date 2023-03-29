@@ -2,6 +2,7 @@ import ButtonBack from '../components/ButtonBack';
 import { useLoaderData } from 'react-router-dom';
 import { getCountries } from '../Data/countries';
 import { useState, useEffect } from 'react';
+import { faAmericanSignLanguageInterpreting } from '@fortawesome/free-solid-svg-icons';
 
 export function loader() {
 	const countries = getCountries();
@@ -27,6 +28,23 @@ function Detail() {
 		return country;
 	}
 
+	const {
+		name,
+		flag,
+		capital,
+		currencies,
+		languages,
+		population,
+		subregion,
+		nativeName,
+		topLevelDomain,
+		region,
+		borders,
+	} = country;
+
+	const populationFormat = new Intl.NumberFormat().format(population);
+	console.log(populationFormat);
+
 	useEffect(() => {
 		getCountry(numericCode)
 			.then((result) => {
@@ -40,35 +58,74 @@ function Detail() {
 	}, []);
 
 	return (
-		<main className='bg-gray-100 h-screen flex flex-col items-center pb-12 px-6  shadow-inner'>
+		<main className='bg-gray-100 h-full flex flex-col items-center pb-12 px-6  shadow-inner'>
 			<div className='container mx-auto'>
 				<ButtonBack />
 
 				{isLoading ? (
 					<h1>Loaded</h1>
 				) : (
-					<section>
+					<section className='my-12'>
 						<div>
-							<img src={country.flag} alt='flag country' />
+							<img src={flag} alt='flag country' />
 						</div>
-						<div>
-							<h1>{country.name}</h1>
+						<div className='mt-12'>
+							<h1 className='font-bold text-xl mb-4'>{name}</h1>
 							<div>
-								<ul>
-									<li>Native Name: </li>
-									<li>Population: </li>
-									<li>Region: </li>
-									<li>Sub Region: </li>
-									<li>Capital: </li>
+								<ul className='mb-10'>
+									<li className='text-sm pb-2 text-gray-800 font-medium'>
+										Native Name: <span>{nativeName}</span>
+									</li>
+									<li className='text-sm pb-2 text-gray-800 font-medium'>
+										Population: <span>{populationFormat}</span>{' '}
+									</li>
+									<li className='text-sm pb-2 text-gray-800 font-medium'>
+										Region: <span>{region}</span>{' '}
+									</li>
+
+									<li className='text-sm pb-2 text-gray-800 font-medium'>
+										Sub Region: <span>{subregion}</span>{' '}
+									</li>
+									<li className='text-sm pb-2 text-gray-800 font-medium'>
+										Capital: <span>{capital}</span>{' '}
+									</li>
 								</ul>
-								<ul>
-									<li>Top Level Domain:</li>
-									<li>Currencies:</li>
-									<li>Languages:</li>
+								<ul className='mb-10'>
+									<li className='text-sm pb-2 text-gray-800 font-medium'>
+										Top Level Domain:
+										{topLevelDomain.map((domain) => {
+											return <span key={domain}>{domain}</span>;
+										})}
+									</li>
+									<li className='text-sm pb-2 text-gray-800 font-medium'>
+										Currencies:{' '}
+										{currencies.map((currency) => {
+											return <span key={currency.code}>{currency.name}</span>;
+										})}
+									</li>
+									<li className='text-sm pb-2 text-gray-800 font-medium'>
+										Languages:{' '}
+										{languages.map((language) => {
+											return (
+												<span key={language.iso639_1}>{language.name}</span>
+											);
+										})}
+									</li>
 								</ul>
 							</div>
 							<div>
-								<p>Border Counties</p>
+								<h4 className='text-md font-medium mb-4'>Border Counties:</h4>
+								<div className='grid grid-cols-3 gap-2'>
+									{borders.map((border) => {
+										return (
+											<div
+												key={border}
+												className='shadow-lg w-24 py-1  bg-white rounded-sm text-gray-700 flex items-center justify-center gap-2'>
+												<p>{border}</p>
+											</div>
+										);
+									})}
+								</div>
 							</div>
 						</div>
 					</section>

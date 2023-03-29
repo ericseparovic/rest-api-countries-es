@@ -6,7 +6,7 @@ export async function getCountries() {
 		return data;
 	} catch (error) {
 		console.error(error);
-		return null;
+		return [];
 	}
 }
 

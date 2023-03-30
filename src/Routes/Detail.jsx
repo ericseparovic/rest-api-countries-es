@@ -1,28 +1,15 @@
 import ButtonBack from '../components/ButtonBack';
-import { useLoaderData } from 'react-router-dom';
-import { getCountry } from '../Data/countries';
-
-export function loader() {
-	// Get pathname === numericCodeCountry
-	const url = window.location.pathname;
-	const numericCode = url.substring(url.lastIndexOf('/') + 1);
-	const country = getCountry(numericCode);
-
-	return country;
-}
+import { useEffect, useState } from 'react';
 
 function Detail() {
-	const country = useLoaderData();
-
 	// const populationFormat = new Intl.NumberFormat().format(country.population);
-	console.log(country);
 
 	return (
 		<main className='bg-gray-100 h-full flex flex-col items-center pb-12 px-6  shadow-inner'>
 			<div className='container mx-auto'>
 				<ButtonBack />
 
-				{country ? (
+				{/* {country ? (
 					<section className='my-12 flex sm:flex-row flex-col'>
 						<div>
 							<img src={country.flag} alt='flag country' />
@@ -89,7 +76,7 @@ function Detail() {
 					</section>
 				) : (
 					<h1>Loaded</h1>
-				)}
+				)} */}
 			</div>
 		</main>
 	);

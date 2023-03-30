@@ -1,16 +1,25 @@
 import Search from '../components/Search';
 import Filter from '../components/Filter';
 import Country from '../components/Country';
-import { useLoaderData } from 'react-router-dom';
-import { getCountries } from '../Data/countries';
-
-export function loader() {
-	const countries = getCountries();
-	return countries;
-}
+import { useState, useEffect } from 'react';
 
 function Main() {
-	const countries = useLoaderData();
+	const [countries, setCountries] = useState([]);
+	const [isLoading, setIsLoading] = useState(false);
+
+	useEffect(() => {
+		setIsLoading(true);
+		fetch('src/data.json')
+			.then((response) => response.json())
+			.then((data) => {
+				setCountries(data);
+				setIsLoading(false);
+			})
+			.catch((error) => {
+				console.error('Error fetching data:', error);
+				setIsLoading(false);
+			});
+	}, []);
 
 	return (
 		<main className='bg-gray-100 h-full flex flex-col items-center pb-12 px-6  shadow-inner'>
@@ -19,7 +28,7 @@ function Main() {
 					<Search />
 					<Filter />
 				</form>
-				<section className='grid grid-cols-1  sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-14 place-items-center mt-8'>
+				<section className='grid gap-16 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-12 place-items-center w-full'>
 					{countries.map((country) => {
 						return <Country country={country} key={country.numericCode} />;
 					})}

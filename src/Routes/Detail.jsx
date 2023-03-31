@@ -1,15 +1,46 @@
 import ButtonBack from '../components/ButtonBack';
+import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 function Detail() {
-	// const populationFormat = new Intl.NumberFormat().format(country.population);
+	// Get code numeric of url
+	const { numericCode } = useParams();
+
+	const [countries, setCountries] = useState([]);
+	const [isLoading, setIsLoading] = useState(false);
+
+	useEffect(() => {
+		setIsLoading(true);
+		fetch('../src/data.json')
+			.then((response) => response.json())
+			.then((data) => {
+				setCountries(data);
+				setIsLoading(false);
+			})
+			.catch((error) => {
+				console.error('Error fetching data:', error);
+				setIsLoading(false);
+			});
+	}, []);
+
+	const country = countries.find(
+		(country) => country.numericCode === numericCode
+	);
+
+	const populationFormat = country
+		? new Intl.NumberFormat().format(country.population)
+		: 'N/A';
+
+	const flag = country ? country.flag : country;
+	console.log(flag);
 
 	return (
 		<main className='bg-gray-100 h-full flex flex-col items-center pb-12 px-6  shadow-inner'>
 			<div className='container mx-auto'>
 				<ButtonBack />
+				<h1>{}</h1>
 
-				{/* {country ? (
+				{country ? (
 					<section className='my-12 flex sm:flex-row flex-col'>
 						<div>
 							<img src={country.flag} alt='flag country' />
@@ -22,7 +53,7 @@ function Detail() {
 										Native Name: <span>{country.nativeName}</span>
 									</li>
 									<li className='text-sm pb-2 text-gray-800 font-medium'>
-										Population: <span>{country.population}</span>{' '}
+										Population: <span>{populationFormat}</span>{' '}
 									</li>
 									<li className='text-sm pb-2 text-gray-800 font-medium'>
 										Region: <span>{country.region}</span>{' '}
@@ -44,9 +75,10 @@ function Detail() {
 									</li>
 									<li className='text-sm pb-2 text-gray-800 font-medium'>
 										Currencies:{' '}
-										{country.currencies.map((currency) => {
-											return <span key={currency.code}>{currency.name}</span>;
-										})}
+										{country.currencies &&
+											country.currencies.map((currency) => {
+												return <span key={currency.code}>{currency.name}</span>;
+											})}
 									</li>
 									<li className='text-sm pb-2 text-gray-800 font-medium'>
 										Languages:{' '}
@@ -61,22 +93,26 @@ function Detail() {
 							<div>
 								<h4 className='text-md font-medium mb-4'>Border Counties:</h4>
 								<div className='grid grid-cols-3 gap-2'>
-									{country.borders.map((border) => {
-										return (
-											<div
-												key={border}
-												className='shadow-lg w-24 py-1  bg-white rounded-sm text-gray-700 flex items-center justify-center gap-2'>
-												<p>{border}</p>
-											</div>
-										);
-									})}
+									{country.borders ? (
+										country.borders.map((border) => {
+											return (
+												<div
+													key={border}
+													className='shadow-lg w-24 py-1  bg-white rounded-sm text-gray-700 flex items-center justify-center gap-2'>
+													<p>{border}</p>
+												</div>
+											);
+										})
+									) : (
+										<p>Has no borders</p>
+									)}
 								</div>
 							</div>
 						</div>
 					</section>
 				) : (
 					<h1>Loaded</h1>
-				)} */}
+				)}
 			</div>
 		</main>
 	);

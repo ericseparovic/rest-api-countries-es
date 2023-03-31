@@ -30,7 +30,13 @@ function Main() {
 				</form>
 				<section className='grid gap-16 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-12 place-items-center w-full'>
 					{countries.map((country) => {
-						return <Country country={country} key={country.numericCode} />;
+						return (
+							<Country
+								country={country}
+								key={country.numericCode}
+								numericCode={country.numericCode}
+							/>
+						);
 					})}
 				</section>
 			</div>

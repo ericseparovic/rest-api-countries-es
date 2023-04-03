@@ -7,6 +7,11 @@ import '../loading.css';
 function Main() {
 	const [countries, setCountries] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
+	const [inputSearch, setInputSearch] = useState('');
+
+	const handleSearch = (e) => {
+		setInputSearch(e.target.value);
+	};
 
 	useEffect(() => {
 		setIsLoading(true);
@@ -26,7 +31,7 @@ function Main() {
 		<main className='bg-gray-100 h-full flex flex-col items-center pb-12 px-6  shadow-inner min-h-screen'>
 			<div className='container mx-auto w-full'>
 				<form className='md:flex justify-between mt-8'>
-					<Search />
+					<Search handleSearch={handleSearch} inputSearch={inputSearch} />
 					<Filter />
 				</form>
 				{!isLoading ? (

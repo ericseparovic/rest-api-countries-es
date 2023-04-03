@@ -34,17 +34,17 @@ function Detail() {
 
 	return (
 		<main className='bg-gray-100 h-full flex flex-col items-center pb-12 px-6  shadow-inner'>
-			<div className='container mx-auto'>
+			<div className='container mx-auto max-w-4xl'>
 				<ButtonBack />
 
 				{!isLoading ? (
-					<section className='my-12 flex sm:flex-row flex-col'>
-						<div>
+					<section className='gap-10 my-12 flex md:flex-row flex-col justify-between items-start'>
+						<div className='md:max-w-md'>
 							<img src={country?.flag} alt='flag country' />
 						</div>
-						<div className='mt-12'>
+						<div>
 							<h1 className='font-bold text-xl mb-4'>{country?.name}</h1>
-							<div>
+							<div className='sm:flex gap-4 w-full'>
 								<ul className='mb-10'>
 									<li className='text-sm pb-2 text-gray-800 font-medium'>
 										Native Name: <span>{country?.nativeName}</span>
@@ -90,7 +90,8 @@ function Detail() {
 							<div>
 								<h4 className='text-md font-medium mb-4'>Border Counties:</h4>
 								<div className='grid grid-cols-3 gap-2'>
-									{country && country.borders ? (
+									{country &&
+										country.borders &&
 										country.borders.map((border) => {
 											return (
 												<div
@@ -99,10 +100,7 @@ function Detail() {
 													<p>{border}</p>
 												</div>
 											);
-										})
-									) : (
-										<h1>hola</h1>
-									)}
+										})}
 								</div>
 							</div>
 						</div>

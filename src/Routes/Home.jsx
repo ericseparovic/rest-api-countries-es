@@ -5,14 +5,36 @@ import { useState, useEffect } from 'react';
 import '../loading.css';
 
 function Main() {
+	// Define the states for countries, loading status, search input, and filtered countries
 	const [countries, setCountries] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
 	const [inputSearch, setInputSearch] = useState('');
+	const [filterCountries, setFilterCountrires] = useState(countries);
 
+	// Handle the search input
 	const handleSearch = (e) => {
 		setInputSearch(e.target.value);
 	};
 
+	// Trigger the searchCountry function when inputSearch changes
+	useEffect(() => {
+		searchCountry();
+	}, [inputSearch]);
+
+	// Filter countries based on the search input
+	function searchCountry() {
+		const filteredItems = countries.filter((item) =>
+			item.name.toLowerCase().startsWith(inputSearch.toLowerCase())
+		);
+		setFilterCountrires(filteredItems);
+	}
+
+	// Update the filtered countries when the countries state changes
+	useEffect(() => {
+		setFilterCountrires(countries);
+	}, [countries]);
+
+	// Fetch data from the JSON file and update the countries state
 	useEffect(() => {
 		setIsLoading(true);
 		fetch('src/data.json')
@@ -27,6 +49,7 @@ function Main() {
 			});
 	}, []);
 
+	// Render the main component with the search bar, filter, and list of countries
 	return (
 		<main className='bg-gray-100 h-full flex flex-col items-center pb-12 px-6  shadow-inner min-h-screen'>
 			<div className='container mx-auto w-full'>
@@ -36,7 +59,7 @@ function Main() {
 				</form>
 				{!isLoading ? (
 					<section className='grid gap-16 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-12 place-items-center w-full'>
-						{countries.map((country) => {
+						{filterCountries.map((country) => {
 							return (
 								<Country
 									country={country}

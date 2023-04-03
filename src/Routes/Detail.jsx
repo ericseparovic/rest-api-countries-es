@@ -4,12 +4,14 @@ import { useEffect, useState } from 'react';
 import '../loading.css';
 
 function Detail() {
-	// Get code numeric of url
+	// Get numeric code from URL
 	const { numericCode } = useParams();
 
+	// Initialize state variables
 	const [countries, setCountries] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
 
+	// Fetch data when component mounts
 	useEffect(() => {
 		setIsLoading(true);
 		fetch('../src/data.json')
@@ -24,10 +26,12 @@ function Detail() {
 			});
 	}, []);
 
+	// Find the country with the matching numeric code
 	const country = countries.find(
 		(country) => country.numericCode === numericCode
 	);
 
+	// Format the population number with thousands separators
 	const populationFormat = country
 		? new Intl.NumberFormat().format(country.population)
 		: 'N/A';
@@ -36,6 +40,8 @@ function Detail() {
 		<main className='bg-gray-100 h-full flex flex-col items-center pb-12 px-6  shadow-inner'>
 			<div className='container mx-auto max-w-4xl'>
 				<ButtonBack />
+
+				{/* Display loading spinner if data is being fetched */}
 
 				{!isLoading ? (
 					<section className='gap-10 my-12 flex md:flex-row flex-col justify-between items-start'>

@@ -9,7 +9,7 @@ function Header() {
 
 	return (
 		<>
-			<header className='container mx-auto px-5'>
+			<header className='container mx-auto max-w-4xl lg:px-0 px-6'>
 				<div className='w-full flex justify-between h-20 items-center'>
 					<h1 className='font-bold md:text-xl text-sm'>Where in the word?</h1>
 					<div className='flex item-center gap-2'>

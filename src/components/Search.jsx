@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
-function Search() {
+function Search({ handleSearch, inputSearch }) {
 	return (
 		<div className='mb-12 relative shadow-lg'>
 			<div className='absolute flex items-center p-5'>
@@ -13,6 +13,8 @@ function Search() {
 				name=''
 				id=''
 				placeholder='Search for a country...'
+				onChange={handleSearch}
+				value={inputSearch}
 			/>
 		</div>
 	);

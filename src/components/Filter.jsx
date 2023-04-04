@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
 
-function Filter() {
+function Filter({ handleFilter }) {
 	const [status, setState] = useState(false);
 
 	function showModalFilter() {
@@ -19,11 +19,13 @@ function Filter() {
 				className={`bg-white text-xs w-44  absolute top-16 right-0  cursor-pointer rounded-md shadow-lg ${
 					!status && 'hidden'
 				}`}>
-				<ul>
-					<li className='px-5 py-2 hover:bg-slate-100'>Africa</li>
-					<li className='px-5 py-2 hover:bg-slate-100'>America</li>
+				<ul onClick={(e) => handleFilter(e.target)}>
+					<li onClick={handleFilter} className='px-5 py-2 hover:bg-slate-100'>
+						Africa
+					</li>
+					<li className='px-5 py-2 hover:bg-slate-100'>Americas</li>
 					<li className='px-5 py-2 hover:bg-slate-100'>Asia</li>
-					<li className='px-5 py-2 hover:bg-slate-100'>Europa</li>
+					<li className='px-5 py-2 hover:bg-slate-100'>Europe</li>
 					<li className='px-5 py-2 hover:bg-slate-100'>Oceania</li>
 				</ul>
 			</div>

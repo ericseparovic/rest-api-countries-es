@@ -16,10 +16,16 @@ function Main() {
 		setInputSearch(e.target.value);
 	};
 
-	// Trigger the searchCountry function when inputSearch changes
-	useEffect(() => {
-		searchCountry();
-	}, [inputSearch]);
+	const handleFilter = (element) => {
+		filterCountry(element.textContent);
+	};
+
+	// Filter countrires based on the region
+	function filterCountry(region) {
+		const filterItems = countries.filter((item) => item.region === region);
+
+		setFilterCountrires(filterItems);
+	}
 
 	// Filter countries based on the search input
 	function searchCountry() {
@@ -33,6 +39,11 @@ function Main() {
 	useEffect(() => {
 		setFilterCountrires(countries);
 	}, [countries]);
+
+	// Trigger the searchCountry function when inputSearch changes
+	useEffect(() => {
+		searchCountry();
+	}, [inputSearch]);
 
 	// Fetch data from the JSON file and update the countries state
 	useEffect(() => {
@@ -55,7 +66,7 @@ function Main() {
 			<div className='container mx-auto w-full'>
 				<form className='md:flex justify-between mt-8'>
 					<Search handleSearch={handleSearch} inputSearch={inputSearch} />
-					<Filter />
+					<Filter handleFilter={handleFilter} />
 				</form>
 				{!isLoading ? (
 					<section className='grid gap-16 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-12 place-items-center w-full'>

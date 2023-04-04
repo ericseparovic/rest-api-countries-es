@@ -19,7 +19,7 @@ function Filter({ handleFilter }) {
 				className={`bg-white text-xs w-44  absolute top-16 right-0  cursor-pointer rounded-md shadow-lg ${
 					!status && 'hidden'
 				}`}>
-				<ul onClick={(e) => handleFilter(e.target)}>
+				<ul onClick={(e) => handleFilter(e)}>
 					<li onClick={handleFilter} className='px-5 py-2 hover:bg-slate-100'>
 						Africa
 					</li>

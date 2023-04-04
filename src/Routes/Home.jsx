@@ -5,47 +5,23 @@ import { useState, useEffect } from 'react';
 import '../loading.css';
 
 function Main() {
-	// Define the states for countries, loading status, search input, and filtered countries
 	const [countries, setCountries] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
-	const [inputSearch, setInputSearch] = useState('');
-	const [filterCountries, setFilterCountrires] = useState(countries);
+	const [searchTerm, setSearchTerm] = useState('');
+	const [regionFilter, setRegionFilter] = useState(null);
 
-	// Handle the search input
-	const handleSearch = (e) => {
-		setInputSearch(e.target.value);
-	};
+	// Filter countries by region
+	const filteredByRegion = regionFilter
+		? countries.filter((country) => country.region === regionFilter)
+		: countries;
 
-	const handleFilter = (element) => {
-		filterCountry(element.textContent);
-	};
+	// Filter countries by search term
+	const filteredBySearchTerm = searchTerm
+		? filteredByRegion.filter((country) =>
+				country.name.toLowerCase().includes(searchTerm.toLowerCase())
+		  )
+		: filteredByRegion;
 
-	// Filter countrires based on the region
-	function filterCountry(region) {
-		const filterItems = countries.filter((item) => item.region === region);
-
-		setFilterCountrires(filterItems);
-	}
-
-	// Filter countries based on the search input
-	function searchCountry() {
-		const filteredItems = countries.filter((item) =>
-			item.name.toLowerCase().startsWith(inputSearch.toLowerCase())
-		);
-		setFilterCountrires(filteredItems);
-	}
-
-	// Update the filtered countries when the countries state changes
-	useEffect(() => {
-		setFilterCountrires(countries);
-	}, [countries]);
-
-	// Trigger the searchCountry function when inputSearch changes
-	useEffect(() => {
-		searchCountry();
-	}, [inputSearch]);
-
-	// Fetch data from the JSON file and update the countries state
 	useEffect(() => {
 		setIsLoading(true);
 		fetch('src/data.json')
@@ -60,25 +36,26 @@ function Main() {
 			});
 	}, []);
 
-	// Render the main component with the search bar, filter, and list of countries
+	const handleSearch = (event) => {
+		setSearchTerm(event.target.value);
+	};
+
+	const handleFilter = (event) => {
+		setRegionFilter(event.target.textContent);
+	};
+
 	return (
-		<main className='bg-gray-100 h-full flex flex-col items-center pb-12 px-6  shadow-inner min-h-screen'>
+		<main className='bg-gray-100 h-full flex flex-col items-center pb-12 px-6 shadow-inner min-h-screen'>
 			<div className='container mx-auto w-full'>
 				<form className='md:flex justify-between mt-8'>
-					<Search handleSearch={handleSearch} inputSearch={inputSearch} />
+					<Search searchTerm={searchTerm} handleSearch={handleSearch} />
 					<Filter handleFilter={handleFilter} />
 				</form>
 				{!isLoading ? (
 					<section className='grid gap-16 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-12 place-items-center w-full'>
-						{filterCountries.map((country) => {
-							return (
-								<Country
-									country={country}
-									key={country.numericCode}
-									numericCode={country.numericCode}
-								/>
-							);
-						})}
+						{filteredBySearchTerm.map((country) => (
+							<Country country={country} key={country.numericCode} />
+						))}
 					</section>
 				) : (
 					<div className='flex justify-center items-center mt-36'>

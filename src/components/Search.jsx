@@ -1,5 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import PropTypes from 'prop-types';
 
 function Search({ handleSearch, searchTeam }) {
 	return (
@@ -19,5 +20,10 @@ function Search({ handleSearch, searchTeam }) {
 		</div>
 	);
 }
+
+Search.propTypes = {
+	handleSearch: PropTypes.func.isRequired,
+	searchTeam: PropTypes.string,
+};
 
 export default Search;

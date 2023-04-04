@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 
 function Filter({ handleFilter }) {
 	const [status, setState] = useState(false);
@@ -33,4 +34,7 @@ function Filter({ handleFilter }) {
 	);
 }
 
+Filter.propTypes = {
+	handleFilter: PropTypes.func.isRequired,
+};
 export default Filter;

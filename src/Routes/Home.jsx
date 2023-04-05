@@ -4,7 +4,7 @@ import Country from '../components/Country';
 import { useState, useEffect } from 'react';
 import '../loading.css';
 
-function Main() {
+function Main(props) {
 	const [countries, setCountries] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
 	const [searchTerm, setSearchTerm] = useState('');

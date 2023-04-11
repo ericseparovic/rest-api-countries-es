@@ -1,7 +1,8 @@
 import ButtonBack from '../components/ButtonBack';
 import { useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import '../loading.css';
+import ThemeContext from '../components/ThemeProvider';
 
 function Detail() {
 	// Get numeric code from URL
@@ -10,6 +11,8 @@ function Detail() {
 	// Initialize state variables
 	const [countries, setCountries] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
+
+	const { theme } = useContext(ThemeContext);
 
 	// Fetch data when component mounts
 	useEffect(() => {
@@ -37,7 +40,10 @@ function Detail() {
 		: 'N/A';
 
 	return (
-		<main className='bg-gray-100 h-full flex flex-col items-center pb-12 px-6  shadow-inner'>
+		<main
+			className={`flex flex-col items-center pb-12 px-6  shadow-inner h-screen ${
+				theme ? 'bg-veryDarkBlueBG' : 'bg-gray-100'
+			}`}>
 			<div className='container mx-auto max-w-4xl'>
 				<ButtonBack />
 
@@ -49,41 +55,67 @@ function Detail() {
 							<img src={country?.flag} alt='flag country' />
 						</div>
 						<div>
-							<h1 className='font-bold text-xl mb-4'>{country?.name}</h1>
+							<h1 className={`font-bold text-xl mb-4 ${theme && 'text-white'}`}>
+								{country?.name}
+							</h1>
 							<div className='sm:flex gap-4 w-full'>
 								<ul className='mb-10'>
-									<li className='text-sm pb-2 text-gray-800 font-medium'>
+									<li
+										className={`text-sm pb-2 font-medium ${
+											theme ? 'text-white' : 'text-gray-800'
+										}`}>
 										Native Name: <span>{country?.nativeName}</span>
 									</li>
-									<li className='text-sm pb-2 text-gray-800 font-medium'>
+									<li
+										className={`text-sm pb-2 font-medium ${
+											theme ? 'text-white' : 'text-gray-800'
+										}`}>
 										Population: <span>{populationFormat}</span>{' '}
 									</li>
-									<li className='text-sm pb-2 text-gray-800 font-medium'>
+									<li
+										className={`text-sm pb-2 font-medium ${
+											theme ? 'text-white' : 'text-gray-800'
+										}`}>
 										Region: <span>{country?.region}</span>{' '}
 									</li>
 
-									<li className='text-sm pb-2 text-gray-800 font-medium'>
+									<li
+										className={`text-sm pb-2 font-medium ${
+											theme ? 'text-white' : 'text-gray-800'
+										}`}>
 										Sub Region: <span>{country?.subregion}</span>{' '}
 									</li>
-									<li className='text-sm pb-2 text-gray-800 font-medium'>
+									<li
+										className={`text-sm pb-2 font-medium ${
+											theme ? 'text-white' : 'text-gray-800'
+										}`}>
 										Capital: <span>{country?.capital}</span>{' '}
 									</li>
 								</ul>
 								<ul className='mb-10'>
-									<li className='text-sm pb-2 text-gray-800 font-medium'>
+									<li
+										className={`text-sm pb-2 font-medium ${
+											theme ? 'text-white' : 'text-gray-800'
+										}`}>
 										Top Level Domain:
 										{country?.topLevelDomain.map((domain) => {
 											return <span key={domain}>{domain}</span>;
 										})}
 									</li>
-									<li className='text-sm pb-2 text-gray-800 font-medium'>
+									<li
+										className={`text-sm pb-2 font-medium ${
+											theme ? 'text-white' : 'text-gray-800'
+										}`}>
 										Currencies:{' '}
 										{country?.currencies &&
 											country.currencies.map((currency) => {
 												return <span key={currency.code}>{currency.name}</span>;
 											})}
 									</li>
-									<li className='text-sm pb-2 text-gray-800 font-medium'>
+									<li
+										className={`text-sm pb-2 font-medium ${
+											theme ? 'text-white' : 'text-gray-800'
+										}`}>
 										Languages:{' '}
 										{country?.languages.map((language) => {
 											return (
@@ -94,7 +126,12 @@ function Detail() {
 								</ul>
 							</div>
 							<div>
-								<h4 className='text-md font-medium mb-4'>Border Counties:</h4>
+								<h4
+									className={`text-md font-medium mb-4 ${
+										theme && 'text-white'
+									}`}>
+									Border Counties:
+								</h4>
 								<div className='grid grid-cols-3 gap-2'>
 									{country &&
 										country.borders &&
@@ -102,7 +139,9 @@ function Detail() {
 											return (
 												<div
 													key={border}
-													className='shadow-lg w-24 py-1 bg-white rounded-sm text-gray-700 flex items-center justify-center gap-2'>
+													className={`shadow-lg w-24 py-1 rounded-sm text-gray-700 flex items-center justify-center gap-2 ${
+														theme ? 'bg-darkBlue text-white' : 'bg-white'
+													}`}>
 													<p>{border}</p>
 												</div>
 											);

@@ -6,19 +6,28 @@ import { useContext } from 'react';
 import ThemeContext from './ThemeProvider';
 
 function Header() {
-	const iconFaMoonLight = <FontAwesomeIcon icon={faMoonLight} size='lg' />;
-	// const iconFaMoonDark = <FontAwesomeIcon icon={faMoonDark} size='lg' />;
 	const { theme, handleTheme } = useContext(ThemeContext);
+
+	const iconFaMoonLight = (
+		<FontAwesomeIcon icon={faMoonLight} color={theme && 'white'} size='lg' />
+	);
 
 	return (
 		<>
-			<header className='container mx-auto  lg:px-0 px-6'>
-				<div className='w-full flex justify-between h-20 items-center'>
-					<h1 className='font-bold md:text-xl text-sm'>Where in the word?</h1>
+			<header className={` w-full  lg:px-0 px-6 ${theme && `bg-darkBlue`} `}>
+				<div className='container mx-auto flex justify-between h-20 items-center'>
+					<h1
+						className={`font-bold md:text-xl text-sm  ${
+							theme ? 'text-white' : 'text-veryDarkBlueText'
+						}`}>
+						Where in the word?
+					</h1>
 					<div className='flex item-center gap-2'>
-						<div>{iconFaMoonLight}</div>
+						<div className='pt-1'>{iconFaMoonLight}</div>
 						<button
-							className='text-gray-800 md:text-lg text-sm'
+							className={`text-white-800 md:text-lg text-sm ${
+								theme ? 'text-white' : 'text-veryDarkBlueText'
+							}`}
 							onClick={handleTheme}>
 							Dark Mode
 						</button>

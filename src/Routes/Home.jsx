@@ -1,10 +1,13 @@
 import Search from '../components/Search';
 import Filter from '../components/Filter';
 import Country from '../components/Country';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import '../loading.css';
+import ThemeContext from '../components/ThemeProvider';
 
 function Main(props) {
+	const { theme, handleTheme } = useContext(ThemeContext);
+
 	const [countries, setCountries] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
 	const [searchTerm, setSearchTerm] = useState('');
@@ -45,7 +48,10 @@ function Main(props) {
 	};
 
 	return (
-		<main className='bg-gray-100 h-full flex flex-col items-center pb-12 px-6 shadow-inner min-h-screen'>
+		<main
+			className={`h-full flex flex-col items-center pb-12 px-6 shadow-inner min-h-screen ${
+				theme ? 'bg-veryDarkBlueBG' : 'bg-gray-100'
+			} `}>
 			<div className='container mx-auto w-full'>
 				<form className='md:flex justify-between mt-8'>
 					<Search searchTerm={searchTerm} handleSearch={handleSearch} />

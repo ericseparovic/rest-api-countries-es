@@ -1,10 +1,12 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
+import ThemeContext from './ThemeProvider';
 
 function Filter({ handleFilter }) {
 	const [status, setState] = useState(false);
+	const { theme } = useContext(ThemeContext);
 
 	function showModalFilter() {
 		setState(!status);
@@ -12,14 +14,20 @@ function Filter({ handleFilter }) {
 
 	return (
 		<div
-			className='bg-white rounded-md w-44 p-4 flex items-center justify-between relative text-gray-800 h-14 cursor-pointer shadow-lg'
+			className={`rounded-md w-44 p-4 flex items-center justify-between relative text-gray-800 h-14 cursor-pointer shadow-lg ${
+				theme ? 'bg-darkBlue' : 'bg-white'
+			}`}
 			onClick={showModalFilter}>
-			<p className='text-xs'>Filter by Region</p>
-			<FontAwesomeIcon icon={faChevronDown} size='xs' />
+			<p className={`text-sm ${theme && 'text-white'}`}>Filter by Region</p>
+			<FontAwesomeIcon
+				icon={faChevronDown}
+				size='xs'
+				color={theme && 'white'}
+			/>
 			<div
 				className={`bg-white text-xs w-44  absolute top-16 right-0  cursor-pointer rounded-md shadow-lg ${
 					!status && 'hidden'
-				}`}>
+				} ${theme && 'bg-darkBlue text-white'}`}>
 				<ul onClick={(e) => handleFilter(e)}>
 					<li onClick={handleFilter} className='px-5 py-2 hover:bg-slate-100'>
 						Africa

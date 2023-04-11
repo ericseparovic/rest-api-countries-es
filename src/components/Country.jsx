@@ -1,7 +1,11 @@
 import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import ThemeContext from './ThemeProvider';
 
 function Country({ country }) {
 	const { name, population, region, capital, flag, numericCode } = country;
+
+	const { theme } = useContext(ThemeContext);
 
 	return (
 		<Link to={`/detail/${numericCode}`}>
@@ -13,17 +17,19 @@ function Country({ country }) {
 						alt='img country'
 					/>
 				</div>
-				<div className='bg-white p-6'>
-					<h2 className='font-bold text-xl mb-4'>{name}</h2>
-					<p className='text-sm pb-2 text-gray-800 font-medium'>
+				<div className={`p-6 ${theme && 'bg-darkBlue'}`}>
+					<h2 className={`font-bold text-xl mb-4 ${theme && 'text-white'}`}>
+						{name}
+					</h2>
+					<p className={`text-sm pb-2 font-bold ${theme && 'text-white'}`}>
 						Population:{' '}
 						<span className='text-gray-700 font-light'>{population}</span>
 					</p>
-					<p className='text-sm pb-2 text-gray-800 font-medium'>
+					<p className={`text-sm pb-2 font-bold ${theme && 'text-white'}`}>
 						Region: <span className='text-gray-700 font-light'>{region}</span>
 					</p>
 
-					<p className='text-sm pb-2 text-gray-800 font-medium'>
+					<p className={`text-sm pb-2 font-bold ${theme && 'text-white'}`}>
 						Capital: <span className='text-gray-700 font-light'>{capital}</span>
 					</p>
 				</div>

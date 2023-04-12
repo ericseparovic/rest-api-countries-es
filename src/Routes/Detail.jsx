@@ -41,17 +41,17 @@ function Detail() {
 
 	return (
 		<main
-			className={`flex flex-col items-center pb-12 px-6  shadow-inner h-screen ${
+			className={`flex flex-col items-center pb-12 px-6 shadow-inner h-screen ${
 				theme ? 'bg-veryDarkBlueBG' : 'bg-gray-100'
 			}`}>
-			<div className='container mx-auto max-w-4xl'>
+			<div className='container mx-auto max-w-7xl md:mt-40'>
 				<ButtonBack />
 
 				{/* Display loading spinner if data is being fetched */}
 
 				{!isLoading ? (
 					<section className='gap-10 my-12 flex md:flex-row flex-col justify-between items-start'>
-						<div className='md:max-w-md'>
+						<div className='md:max-w-3xl'>
 							<img src={country?.flag} alt='flag country' />
 						</div>
 						<div>

@@ -6,7 +6,7 @@ import '../loading.css';
 import ThemeContext from '../components/ThemeProvider';
 
 function Main(props) {
-	const { theme, handleTheme } = useContext(ThemeContext);
+	const { theme } = useContext(ThemeContext);
 
 	const [countries, setCountries] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);

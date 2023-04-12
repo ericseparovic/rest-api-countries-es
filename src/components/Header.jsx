@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMoon as faMoonLight } from '@fortawesome/free-regular-svg-icons';
 // import { faMoon as faMoonDark } from '@fortawesome/free-solid-svg-icons';
 import { Outlet } from 'react-router-dom';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import ThemeContext from './ThemeProvider';
 
 function Header() {

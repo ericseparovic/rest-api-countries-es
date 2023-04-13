@@ -1,6 +1,6 @@
-# Name Project
+# Rest Countries
 
-This is a solution to the [name project](urlproject.com).
+This is a solution to the [Rest Countries](urlproject.com).
 
 ## Table of contents
 
@@ -13,8 +13,6 @@ This is a solution to the [name project](urlproject.com).
   - [What I learned](#what-i-learned)
   - [Continued development](#continued-development)
   - [Useful resources](#useful-resources)
-- [Author](#author)
-- [Acknowledgments](#acknowledgments)
 
 ## Overview
 
@@ -29,7 +27,7 @@ This is a solution to the [name project](urlproject.com).
 
 ### Screenshot
 
-![](./screenshot.jpg)
+![](./design/desktop-preview.jpg)
 
 ### Links
 

@@ -17,7 +17,7 @@ function Detail() {
 	// Fetch data when component mounts
 	useEffect(() => {
 		setIsLoading(true);
-		fetch('../src/data/data.json')
+		fetch('src/data/data.json')
 			.then((response) => response.json())
 			.then((data) => {
 				setCountries(data);
